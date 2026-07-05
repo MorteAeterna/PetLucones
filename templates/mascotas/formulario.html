@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="mb-4">
+    <h2 class="fw-bold mb-1">
+        {% if object %}Editar mascota{% else %}Nueva mascota{% endif %}
+    </h2>
+    <p class="text-secondary mb-0">
+        Complete los datos de la mascota.
+    </p>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Cliente</label>
+                    {{ form.cliente }}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Nombre</label>
+                    {{ form.nombre }}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Especie</label>
+                    {{ form.especie }}
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Raza</label>
+                    {{ form.raza }}
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Fecha de nacimiento</label>
+                    {{ form.fecha_nacimiento }}
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Peso</label>
+                    {{ form.peso }}
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label">Tamaño</label>
+                    {{ form.tamano }}
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Observaciones</label>
+                    {{ form.observaciones }}
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary">
+                    Guardar
+                </button>
+
+                <a href="{% url 'mascotas:lista' %}" class="btn btn-outline-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petlucones</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">P</div>
+            <div>
+                <h1>Petlucones</h1>
+                <span>Sistema de gestión</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="{% url 'dashboard' %}" class="nav-item {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                Panel
+            </a>
+
+            <a href="{% url 'clientes:lista' %}" class="nav-item {% if request.resolver_match.namespace == 'clientes' %}active{% endif %}">
+                Clientes
+            </a>
+
+            <a href="{% url 'mascotas:lista' %}" class="nav-item {% if request.resolver_match.namespace == 'mascotas' %}active{% endif %}">
+                Mascotas
+            </a>
+
+            <a href="{% url 'servicios:lista' %}" class="nav-item {% if request.resolver_match.namespace == 'servicios' %}active{% endif %}">
+                Servicios
+            </a>
+
+            <a href="{% url 'reservas:lista' %}" class="nav-item {% if request.resolver_match.namespace == 'reservas' and request.resolver_match.url_name != 'agenda' %}active{% endif %}">
+                Reservas
+            </a>
+
+            <a href="{% url 'reservas:agenda' %}" class="nav-item {% if request.resolver_match.url_name == 'agenda' %}active{% endif %}">
+                Agenda
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <span>Versión 1.0</span>
+        </div>
+    </aside>
+
+    <div class="main-content">
+        <header class="topbar">
+            <div>
+                <span class="topbar-label">Petlucones</span>
+                <h2>Panel de control</h2>
+            </div>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="topbar-user border-0">
+                    Cerrar sesión
+                </button>
+            </form>
+        </header>
+
+        <main class="content">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} shadow-sm border-0">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+</div>
+
+</body>
+</html>
