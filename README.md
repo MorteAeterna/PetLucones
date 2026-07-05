@@ -134,7 +134,7 @@ git clone https://github.com/MorteAeterna/PetLucones.git
 Entrar al proyecto
 
 ```bash
-cd PetLucones
+cd peluqueria
 ```
 
 Crear entorno virtual
