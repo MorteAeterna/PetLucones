@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}Servicios{% endblock %}
 
 {% block content %}
 
@@ -14,6 +15,12 @@
 <div class="card shadow-sm border-0">
     <div class="card-body">
 
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                Revise los datos ingresados. Algunos campos tienen errores.
+            </div>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
 
@@ -21,21 +28,25 @@
                 <div class="col-md-6">
                     <label class="form-label">Nombre</label>
                     {{ form.nombre }}
+                    {{ form.nombre.errors }}
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label">Duración en minutos</label>
                     {{ form.duracion }}
+                    {{ form.duracion.errors }}
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label">Precio</label>
                     {{ form.precio }}
+                    {{ form.precio.errors }}
                 </div>
 
                 <div class="col-12">
                     <label class="form-label">Descripción</label>
                     {{ form.descripcion }}
+                    {{ form.descripcion.errors }}
                 </div>
 
                 <div class="col-12">
@@ -44,6 +55,7 @@
                         <label class="form-check-label">
                             Servicio activo
                         </label>
+                        {{ form.activo.errors }}
                     </div>
                 </div>
             </div>
@@ -53,7 +65,7 @@
                     Guardar
                 </button>
 
-                <a href="{% url 'servicios:lista' %}" class="btn btn-outline-secondary">
+                <a href="{% url 'servicios:lista' %}" class="btn-secundario">
                     Cancelar
                 </a>
             </div>
