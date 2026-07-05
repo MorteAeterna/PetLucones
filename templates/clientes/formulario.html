@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}Clientes{% endblock %}
 
 {% block content %}
 
@@ -14,6 +15,12 @@
 <div class="card shadow-sm border-0">
     <div class="card-body">
 
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                Revise los datos ingresados. Algunos campos tienen errores.
+            </div>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
 
@@ -21,21 +28,25 @@
                 <div class="col-md-6">
                     <label class="form-label">Nombre</label>
                     {{ form.nombre }}
+                    {{ form.nombre.errors }}
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label">Apellido</label>
                     {{ form.apellido }}
+                    {{ form.apellido.errors }}
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label">Teléfono</label>
                     {{ form.telefono }}
+                    {{ form.telefono.errors }}
                 </div>
 
                 <div class="col-md-6">
                     <label class="form-label">Correo</label>
                     {{ form.correo }}
+                    {{ form.correo.errors }}
                 </div>
             </div>
 
@@ -44,7 +55,7 @@
                     Guardar
                 </button>
 
-                <a href="{% url 'clientes:lista' %}" class="btn btn-outline-secondary">
+                <a href="{% url 'clientes:lista' %}" class="btn-secundario">
                     Cancelar
                 </a>
             </div>
